@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Bucket-list !{% endblock %}</title>
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-    <div class="container">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bucket-list !{% endblock %}</title>
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+    <link rel="icon" href="{{ asset('images/favicon.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            color: #f8f5f2;
+            font-family: "Pacifico", cursive;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body style="
+    background-image: url('{{ asset('images/fond.jpg') }}');
+    background-color: #f0f8ff;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    ">
+
+
+<div class="container">
+
+
     <header>
         <div class="title-container">
-        <a href="{{ path('main_home') }}"><img src="{{ asset('images/logo.png') }}" alt="logo bucket-list"></a>
-        <h1>Bucket-List</h1>
-    </div>
+            <a href="{{ path('main_home') }}"><img src="{{ asset('images/logo.png') }}" alt="logo bucket-list"></a>
+            <h1>Bucket-List</h1>
+        </div>
         {% include 'view/nav/nav.html.twig' %}
     </header>
-    <main>
+    <main style="
+        position: relative;
+        background: rgba(255, 255, 255, 0.85)">
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </main>
-       <footer>
-           <p>&copy;Bucket-List {{ year | date('Y') }}</p>
-       </footer>
-    </div>
-    </body>
+    <footer>
+        &copy;Bucket-List {{ 'now' | date('Y') }}
+    </footer>
+</div>
+
+{% block body_javascripts %}{% endblock %}
+</body>
 </html>

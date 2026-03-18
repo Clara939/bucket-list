@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un souhait{% endblock %}
+
+{% block body %}
+    <div class="form-container">
+        <div class="form-card">
+            <h2 class="form-title">✨ Créer un nouveau souhait </h2>
+
+            {% embed 'view/form/wish_form.html.twig' %}
+                {% block formTitle %}Crée ton rêve !{% endblock %}
+                {% block buttonLabel %}Créer ! {% endblock %}
+            {% endembed %}
+
+            <div class="form-back-link">
+                <a href="{{ path('wish_list') }}">← Retour à la liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

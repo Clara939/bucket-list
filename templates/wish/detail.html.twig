@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail - {{ wish.title }}{% endblock %}
+
+{% block body %}
+    <div class="wish-detail-container">
+        <article class="wish-detail-card">
+            <header class="wish-header">
+                <h2 class="wish-detail-title">{{ wish.title }}</h2>
+                <div class="wish-meta">
+                    <span class="category-badge">🎯 {{ wish.categorys.name }}</span>
+                    <span class="date-badge">
+                    <i>Créé par {{ wish.user.username }} le {{ wish.dateCreated | date('d/m/Y') }}</i>
+                </span>
+                </div>
+            </header>
+
+            <div class="wish-description">
+                <p>{{ wish.description }}</p>
+            </div>
+            {% if app.user %}
+            {% if app.user == wish.user %}
+            <div class="wish-actions">
+                <a href="{{ path('wish_update', {'id': wish.id}) }}">
+                    <button class="update-button">Modifier</button>
+                </a>
+                {% endif %}
+                {% if app.user == wish.user or is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('wish_delete', {'id': wish.id}) }}"
+                   onclick="return confirm('Attention ! Supprimer le wish {{ wish.title }} ?')">
+                    <button class="delete-button">Supprimer</button>
+                </a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </article>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 style="color: #331E38; margin-bottom: 2rem; font-size: 2.5rem;">Liste de trucs à faire !</h2>
+
+    {% if wishes|length > 0 %}
+        <div class="wishes-grid">
+            {% for wish in wishes %}
+                <article class="wish-card">
+                    <div class="wish-content">
+                        <h3 class="wish-title">{{ wish.title }}</h3>
+                        <div class="wish-category">
+                            <span>🎯 {{ wish.categorys.name }}</span>
+                        </div>
+                        <a href="{{ path('wish_detail', {'id': wish.id }) }}" class="wish-link">
+                            Voir le détail →
+                        </a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>Pas de souhaits ! Ajoute ton premier rêve ✨</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block title %}wish_list{% endblock %}
