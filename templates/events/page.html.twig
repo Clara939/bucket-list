@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Les Evenements !</h2>
+{#    <h3>Rechercher des évenements</h3>#}
+{#    <input type="date" id="dateEvenement" placeholder="Date">#}
+{#    <input type="text" id="ville" placeholder="Ville">#}
+{#    <button onclick="chargerEvents()">Rechercher</button>#}
+{#    <div id="evenements"></div>#}
+    {{ form_start(eventForm) }}
+    {{ form_widget(eventForm) }}
+    <button>Search</button>
+    {{ form_end(eventForm) }}
+
+    {% for event in events %}
+        {% if event.fields.image is defined %}
+            <div><img src="{{ event.fields.image }}" alt="{{ event.fields.title_fr }}"></div>
+        {% endif %}
+        <div>{{ event.fields.title_fr }}</div>
+        <div>{{ event.fields.daterange_fr }}</div>
+        <div>{{ event.fields.location_name }}</div>
+        <div>{{ event.fields.location_address }}</div>
+        <div>{{ event.fields.description_fr }}</div>
+    {% endfor %}
+{% endblock %}
+
+{% block extraJS %}
+{#    <script>#}
+{#        async function chargerEvents(){#}
+{#            let dateInput = document.getElementById('dateEvenement').value;#}
+{#            let villeInput = document.getElementById('ville').value;#}
+
+{#            let url = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-openagenda';#}
+{#            if(villeInput){#}
+{#                url += '&refine.location_city=' + villeInput;#}
+{#            }#}
+{#            if(dateInput){#}
+{#                url += '&refine.firstdate_begin=' + dateInput;#}
+{#            }#}
+{#                fetch(url)#}
+{#                .then(response => response.json())#}
+{#                .then(data => {#}
+{#                    let html = "Trouvé " + data.records.length + "événements :<br>";#}
+{#                    data.records.slice(0,10).forEach(function (evenement){#}
+{#                        html += '<div class="event-card">';#}
+{#                        html += '<h3 class="wish-title">' + evenement.fields.title_fr + '</h3>';#}
+{#                        if(evenement.fields.thumbnail) {#}
+{#                            html += '<div class="image-container">';#}
+{#                            html += '<img src="' + evenement.fields.thumbnail + '" alt="' + evenement.fields.title_fr + '">';#}
+{#                            html += '</div>';#}
+{#                        }#}
+{#                        html += '<p><strong>Lieu :</strong> ' + evenement.fields.location_name + '</p>';#}
+{#                        html += '<p><strong>Adresse :</strong> ' + evenement.fields.location_address + '</p>';#}
+{#                        html += '<p><strong>Date :</strong> ' + evenement.fields.daterange_fr + '</p>';#}
+{#                        html += '<p>' + evenement.fields.description_fr + '</p>';#}
+{#                        html += '<a href="' + evenement.fields.canonicalurl + '" class="wish-link" target="_blank">En savoir plus</a>';#}
+{#                        html += '</div>';#}
+{#                    });#}
+{#                    document.getElementById('evenements').innerHTML = html;#}
+
+{#                })#}
+{#        }#}
+
+
+
+
+{#    </script>#}
+{% endblock %}
+

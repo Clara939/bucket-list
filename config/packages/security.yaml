@@ -45,6 +45,7 @@ security:
         - { path: ^//wishes/delete/, roles: ROLE_ADMIN }
         - { path: ^//wishes/(create|update|delete)/, roles: ROLE_USER }
         - { path: ^//wishes/, roles: PUBLIC_ACCESS }
+        - { path: ^//events/, roles: PUBLIC_ACCESS }
         # - { path: ^/profile, roles: ROLE_USER }
 
     role_hierarchy:
